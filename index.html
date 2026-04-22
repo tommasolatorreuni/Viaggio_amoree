@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>La tua sorpresa 🎁</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+button {
+    margin: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff6b81;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff4757;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    color: #ff4757;
+}
+
+.city {
+    display: inline-block;
+    width: 150px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.city img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.city img:hover {
+    transform: scale(1.05);
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="start">
+<h1>🎓 Complimenti amore ❤️</h1>
+<p>Ho pensato a qualcosa di speciale per te...</p>
+<p>Sei pronta a partire? ✈️</p>
+<button onclick="next('q1')">INIZIA</button>
+</div>
+
+<div id="q1" class="hidden">
+<h2>🌍 Che tipo di viaggio vuoi?</h2>
+<button onclick="next('q2')">Relax 🧘‍♀️</button>
+<button onclick="next('q2')">Avventura 🎒</button>
+</div>
+
+<div id="q2" class="hidden">
+<h2>🍷 Cosa preferisci?</h2>
+<button onclick="next('q3')">Cibo e cultura</button>
+<button onclick="next('q3')">Passeggiate romantiche</button>
+</div>
+
+<div id="q3" class="hidden">
+<h2>✨ Scegli la città che ti ispira di più</h2>
+
+<div class="city" onclick="showResult('Budapest')">
+<img src="https://source.unsplash.com/300x200/?budapest">
+<p>Budapest 🇭🇺</p>
+</div>
+
+<div class="city" onclick="showResult('Vienna')">
+<img src="https://source.unsplash.com/300x200/?vienna">
+<p>Vienna 🇦🇹</p>
+</div>
+
+<div class="city" onclick="showResult('Cracovia')">
+<img src="https://source.unsplash.com/300x200/?krakow">
+<p>Cracovia 🇵🇱</p>
+</div>
+
+<div class="city" onclick="showResult('Madrid')">
+<img src="https://source.unsplash.com/300x200/?madrid">
+<p>Madrid 🇪🇸</p>
+</div>
+
+<div class="city" onclick="showResult('Parigi')">
+<img src="https://source.unsplash.com/300x200/?paris,eiffel">
+<p>Parigi 🇫🇷</p>
+</div>
+
+</div>
+
+<div id="result" class="hidden">
+<h1>✈️ Preparati...</h1>
+<p id="finalText"></p>
+
+<h3>💭 Oppure scegli tu:</h3>
+<input type="text" id="customCity" placeholder="Scrivi la città che preferisci...">
+<br>
+<button onclick="customChoice()">Conferma scelta ❤️</button>
+
+<p id="customResult"></p>
+
+</div>
+
+</div>
+
+<script>
+
+function next(id) {
+    document.querySelectorAll('.container > div').forEach(el => el.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function showResult(city) {
+    let text = "";
+
+    if(city === "Budapest") {
+        text = "💖 Si parte per BUDAPEST!<br>Volo: 139€<br>Hotel: 209€<br>Extra: 60€";
+    }
+    if(city === "Vienna") {
+        text = "💖 Si parte per VIENNA!<br>14-17 Ottobre<br>Volo: 99€<br>Hotel: 218€";
+    }
+    if(city === "Cracovia") {
+        text = "💖 Si parte per CRACOVIA!<br>19-23 Ottobre<br>Volo: 152€<br>Hotel: 213€";
+    }
+    if(city === "Madrid") {
+        text = "💖 Si parte per MADRID!<br>19-23 Ottobre<br>Volo: 90€<br>Hotel: ~300€";
+    }
+    if(city === "Parigi") {
+        text = "💖 Si parte per PARIGI!<br>9-12 Dicembre<br>+ Disney 🎢❤️";
+    }
+
+    document.getElementById("finalText").innerHTML = text + "<br><br>🎁 Questo è il tuo regalo di laurea ❤️";
+    next('result');
+}
+
+function customChoice() {
+    let city = document.getElementById("customCity").value;
+    if(city.trim() === "") {
+        document.getElementById("customResult").innerHTML = "Scrivi una città 😄";
+    } else {
+        document.getElementById("customResult").innerHTML =
+        "💖 Perfetto! Allora organizziamo il viaggio per: <b>" + city + "</b> ✈️❤️";
+    }
+}
+
+</script>
+
+</body>
+</html>
